@@ -2,7 +2,7 @@ import discord
 import os
 from keep_alive import keep_alive
 from APIHandler import APIHandler
-from utils import extractFromMessage
+from utils import extractFromMessage, writeTaskToLogFile
 
 client = discord.Client()
 
@@ -22,12 +22,15 @@ async def on_message(message):
         return
 
     if message.content.startswith('!todoBot help'):
-        help = "Commande actuellement disponible :\n- addTask"
+        help = "Commande actuellement disponible :\n- addTask \"ProjectName\" \"TaskContent\" \"Date\" "
         await message.channel.send(help)
 
     if message.content.startswith('!todoBot addTask'):
         (projectID, taskContent, dueDate) = extractFromMessage(message, todo)
-        todo.createTask(taskContent, projectID, dueDate)
+        result = todo.createTask(taskContent, projectID, dueDate)
+
+        writeTaskToLogFile(result)
+
         await message.channel.send("Okay")
 
 

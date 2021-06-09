@@ -26,3 +26,9 @@ def correctDateIfNecessary(dueDate):
     if "/" in dueDate:
         dueDate = dueDate.replace("/", "-")
     return dueDate
+
+
+def writeTaskToLogFile(task):
+    taskFileLog = open("taskLog.txt", "a+")
+    taskFileLog.write(str(task.get("id")) + " " + str(task.get("due").get("date")) + "\n")
+    taskFileLog.close()
