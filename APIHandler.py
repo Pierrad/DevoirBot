@@ -57,6 +57,8 @@ class APIHandler:
 			dueDate = date.today()
 			delay = timedelta(days=14)
 			dueDate += delay
+		
+		print(dueDate)
 
 		result = requests.post("%s/tasks" % self.apiUrl,
 		data=json.dumps({
@@ -71,3 +73,4 @@ class APIHandler:
 		}).json()
 
 		return result
+

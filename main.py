@@ -26,8 +26,8 @@ async def on_message(message):
         await message.channel.send(help)
 
     if message.content.startswith('!todoBot addTask'):
-        (taskContent, projectID) = extractFromMessage(message, todo)
-        todo.createTask(taskContent, projectID)
+        (projectID, taskContent, dueDate) = extractFromMessage(message, todo)
+        todo.createTask(taskContent, projectID, dueDate)
         await message.channel.send("Okay")
 
 
