@@ -1,6 +1,5 @@
-
 import requests
-from datetime import datetime
+from datetime import datetime, date, timedelta
 import uuid
 import json
 
@@ -22,8 +21,7 @@ class APIHandler:
 	def getProjectIDByName(self, projectName):
 		projectList = self.getProjectList()
 		projectIdFromName = list((project['id'] for project in projectList if project['name'] == projectName))[0]
-		print(projectIdFromName)
-		return str(projectIdFromName)
+		return projectIdFromName
 
 	def createProject(self, projectName):
 		self.api.projects.add(projectName)
@@ -53,10 +51,18 @@ class APIHandler:
 
 		return todayTasks
 
-	def createTask(self, task_content):
+	def createTask(self, taskContent, projectID = "", dueDate = ""):
+		# If no date, current date + 2 weeks
+		if dueDate == "":
+			dueDate = date.today()
+			delay = timedelta(days=14)
+			dueDate += delay
+
 		result = requests.post("%s/tasks" % self.apiUrl,
 		data=json.dumps({
-		"content": task_content,
+		"content": taskContent,
+		"project_id": projectID,
+		"due_date": str(dueDate)
 		}),
 		headers={
 		"Content-Type": "application/json",
