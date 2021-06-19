@@ -8,12 +8,14 @@ from utils import extractFromMessage, writeTaskToLogFile, saveIdToFileNotifier,r
 client = discord.Client()
 
 todo = APIHandler(os.environ['TODOIST_API'], "https://api.todoist.com/rest/v1")
-            
+
+channelID = os.environ['channelID']
+
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
     send_message.start("Toutes les minutes")
-    await client.get_channel(851848071544569859).send("Hola, je suis prêt !")
+    await client.get_channel(int(channelID)).send("Hola, je suis prêt !")
 
 @client.event
 async def on_message(message):
@@ -55,7 +57,7 @@ async def on_message(message):
 
 @tasks.loop(minutes=1)
 async def send_message(message):
-    await client.get_channel(851848071544569859).send(message)
+    await client.get_channel(int(channelID)).send(message)
 
 
 keep_alive.keepAlive()
