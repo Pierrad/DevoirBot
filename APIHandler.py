@@ -22,6 +22,15 @@ class APIHandler:
 		projectList = self.getProjectList()
 		projectIdFromName = list((project['id'] for project in projectList if project['name'] == projectName))[0]
 		return projectIdFromName
+    
+	def getProjectNameById(self, id):
+		result = requests.get("%s/projects/%s" % (self.apiUrl, id),
+		headers={
+		"Authorization":
+		"Bearer %s" % self.apiToken
+		}).json()
+
+		return result.get('name')
 
 	def createProject(self, projectName):
 		self.api.projects.add(projectName)
@@ -72,3 +81,18 @@ class APIHandler:
 
 		return result
 
+	def getTaskById(self, id):
+		result = requests.get("%s/tasks/%s" % (self.apiUrl, id),
+		headers={
+		"Authorization":
+		"Bearer %s" % self.apiToken
+		}).json()
+
+		return result
+
+	def getTasksByIds(self, ids):
+		tasksInfos = []
+		for id in ids:
+			res = self.getTaskById(id)
+			tasksInfos.append([self.getProjectNameById(res.get('project_id')), res.get('content'), res.get('due').get('date')])
+		return tasksInfos
