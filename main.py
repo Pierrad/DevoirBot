@@ -3,7 +3,7 @@ from discord.ext import tasks
 import os
 import keep_alive
 from APIHandler import APIHandler
-from utils import extractFromMessage, writeTaskToLogFile, saveIdToFileNotifier,removeIdToFileNotifier
+from utils import extractFromMessage, writeTaskToLogFile, saveIdToFileNotifier,removeIdToFileNotifier, getNotifier, checkForNextTask, formatTasksOutput
 
 client = discord.Client()
 
@@ -14,7 +14,7 @@ channelID = os.environ['channelID']
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
-    send_message.start("Toutes les minutes")
+    getTasks.start()
     await client.get_channel(int(channelID)).send("Hola, je suis prêt !")
 
 @client.event
@@ -52,12 +52,30 @@ async def on_message(message):
             await message.channel.send(f"<@{id}> remove")
         else:
              await message.channel.send(f"<@{id}> fail")
+
+    if message.content.startswith('!devoirBot getNotifier'):
+        res = getNotifier()
+        if (res):
+            await message.channel.send(res)
+        else:
+            await message.channel.send("fail")
+
+    if message.content.startswith('!devoirBot getTasks'):
+        res = todo.getAllTasks()
+        for task in res:
+            print(task)
+            print('\n--------------------------\n')
     
 
-
-@tasks.loop(minutes=1)
-async def send_message(message):
-    await client.get_channel(int(channelID)).send(message)
+@tasks.loop(hours=24)
+async def getTasks():
+    res = checkForNextTask()
+    res2 = todo.getTasksByIds(res)
+    res3 = formatTasksOutput(res2)
+    res4 = getNotifier()
+    res5 = res4 + '\n' + res3
+    if len(res3) != 0:
+        await client.get_channel(int(channelID)).send(res5)
 
 
 keep_alive.keepAlive()
