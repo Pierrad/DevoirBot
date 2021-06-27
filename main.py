@@ -65,6 +65,9 @@ async def on_message(message):
         for task in res:
             print(task)
             print('\n--------------------------\n')
+
+    if message.content.startswith('!devoirBot site'):
+        await message.channel.send("https://devoir-bot.herokuapp.com/")
     
 
 @tasks.loop(hours=24)
