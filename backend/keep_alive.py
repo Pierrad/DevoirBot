@@ -10,17 +10,10 @@ app = Flask(__name__, static_url_path='', static_folder='../frontend/build')
 CORS(app) #comment this on deployment
 api = Api(app)
 
-@app.route("/", defaults={'path':''})
-def serve(path):
+@app.route('/', defaults={'path':''})
+def home(path):
     return send_from_directory(app.static_folder,'index.html')
 
-
-app = Flask('')
-'''
-@app.route('/')
-def home():
-    return "Hello. I am alive!"
-'''
 
 def run():
   port = int(os.environ.get('PORT', 5000))
