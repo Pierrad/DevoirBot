@@ -3,3 +3,4 @@ flask >= 2.0.1
 apscheduler >= 3.7.0
 Flask-APScheduler >= 1.12.2
 requests
+python-dotenv

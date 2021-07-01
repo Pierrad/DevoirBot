@@ -4,6 +4,10 @@ import os
 import keep_alive
 from APIHandler import APIHandler
 from utils import extractFromMessage, writeTaskToLogFile, saveIdToFileNotifier,removeIdToFileNotifier, getNotifier, checkForNextTask, formatTasksOutput
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 client = discord.Client()
 
