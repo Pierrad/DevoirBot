@@ -1,9 +1,9 @@
 import discord
 from discord.ext import tasks
 import os
-import keep_alive
-from APIHandler import APIHandler
-from utils import extractFromMessage, writeTaskToLogFile, saveIdToFileNotifier,removeIdToFileNotifier, getNotifier, checkForNextTask, formatTasksOutput
+import backend.keep_alive
+from backend.APIHandler import APIHandler
+from backend.utils import extractFromMessage, writeTaskToLogFile, saveIdToFileNotifier,removeIdToFileNotifier, getNotifier, checkForNextTask, formatTasksOutput
 from dotenv import load_dotenv
 
 
@@ -85,6 +85,6 @@ async def getTasks():
         await client.get_channel(int(channelID)).send(res5)
 
 
-keep_alive.keepAlive()
+backend.keep_alive.keepAlive()
 client.run(os.environ['TOKEN'])
 
