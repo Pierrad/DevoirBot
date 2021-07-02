@@ -6,4 +6,3 @@ requests
 python-dotenv
 flask-restful
 flask-cors
-gunicorn

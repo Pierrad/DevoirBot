@@ -1,1 +1,1 @@
-web: gunicorn main:app --timeout 200
+web: python main.py
