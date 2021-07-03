@@ -1,3 +1,4 @@
+from backend.APIHandler import APIHandler
 import os
 from flask import Flask
 from threading import Thread
@@ -5,6 +6,11 @@ from threading import Thread
 from flask import Flask, send_from_directory
 from flask_restful import Api
 from flask_cors import CORS #comment this on deployment
+from dotenv import load_dotenv
+
+load_dotenv()
+
+todo = APIHandler(os.environ['TODOIST_API'], "https://api.todoist.com/rest/v1")
 
 app = Flask(__name__, static_url_path='', static_folder='../frontend/build')
 CORS(app) #comment this on deployment
@@ -23,3 +29,26 @@ def run():
 def keepAlive():
     t = Thread(target=run)
     t.start()
+
+@app.route('/test')
+def get():
+    return {
+      'resultStatus': 'SUCCESS',
+      'message': "Hello Api Handler"
+      }
+
+@app.route('/allProject')
+def getAllProject():
+  return {'response': todo.getProjectList()} 
+
+@app.route('/projectWithTask')
+def getAllTasks():
+  allTask = todo.getAllTasks()
+  res = {}
+  for task in allTask:
+    if task['project_id'] not in res:
+      res[task['project_id']] = {'name': todo.getProjectNameById(task['project_id']), 'tasks': [{'id': task['id'], 'date': task['due']['date'], 'content': task['content']}]}
+    else:
+      res[task['project_id']]['tasks'].append({'id': task['id'], 'date': task['due']['date'], 'content': task['content']})
+
+  return {'response': res}
