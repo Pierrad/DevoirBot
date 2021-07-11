@@ -7,9 +7,9 @@ import ProjectListWrapper from './components/ProjectList/wrapper'
 function App() {
   return (
     <div className="HighWrapper">
-      <header>
+      <div>
         <h1>DevoirBot</h1>
-      </header>
+      </div>
       <div>
         <ProjectListWrapper />
       </div>

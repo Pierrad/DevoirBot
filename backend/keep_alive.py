@@ -5,7 +5,7 @@ from threading import Thread
 
 from flask import Flask, send_from_directory
 from flask_restful import Api
-from flask_cors import CORS #comment this on deployment
+from flask_cors import CORS, cross_origin #comment this on deployment
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -17,6 +17,7 @@ CORS(app) #comment this on deployment
 api = Api(app)
 
 @app.route('/', defaults={'path':''})
+@cross_origin()
 def home(path):
     return send_from_directory(app.static_folder,'index.html')
 
@@ -31,6 +32,7 @@ def keepAlive():
     t.start()
 
 @app.route('/test')
+@cross_origin()
 def get():
     return {
       'resultStatus': 'SUCCESS',
@@ -38,10 +40,12 @@ def get():
       }
 
 @app.route('/allProject')
+@cross_origin()
 def getAllProject():
   return {'response': todo.getProjectList()} 
 
 @app.route('/projectWithTask')
+@cross_origin()
 def getAllTasks():
   allTask = todo.getAllTasks()
   res = {}

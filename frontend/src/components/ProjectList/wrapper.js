@@ -6,7 +6,7 @@ function ProjectListWrapper() {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    fetch('http://192.168.1.102:5000/projectWithTask').then(res => res.json()).then(data => {
+    fetch('http://192.168.43.90:5000/projectWithTask').then(res => res.json()).then(data => {
       setData(data.response)
     })
   }, [])
