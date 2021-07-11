@@ -8,7 +8,7 @@ export const ProjectListBox = styled.div`
 export const ProjetListCard = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 3rem 2rem;
+  padding: 2rem 2rem;
   border-radius: 0.5rem;
   border: 1px solid black;
   height: 10rem;
@@ -16,7 +16,6 @@ export const ProjetListCard = styled.div`
   transition: all 0.2s ease 0s;
   overflow: scroll;
   &:hover {
-    transform: translateY(-2px);
     box-shadow: rgba(84, 84, 84, 0.2) 0px 5px 30px;
   }
 `

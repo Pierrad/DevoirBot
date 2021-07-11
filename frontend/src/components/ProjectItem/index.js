@@ -17,7 +17,7 @@ function ProjectItem(props) {
       </SC.ProjectItemBox>
       {modalOpen && (
         <SC.ProjectItemModal>
-          <p onClick={handleClick}>x</p>
+          <SC.ProjectItemModalCloseButton onClick={handleClick}><p>x</p></SC.ProjectItemModalCloseButton>
           <p>{data.content}</p>
           <p>{data.date}</p>
         </SC.ProjectItemModal>
