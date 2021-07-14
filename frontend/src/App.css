@@ -12,3 +12,15 @@ body {
   height: 100%;
   width: 100%;
 }
+
+.Title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.ProjectList {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}

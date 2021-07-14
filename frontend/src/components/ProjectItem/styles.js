@@ -7,6 +7,16 @@ export const ProjectItemBox = styled.div`
   border-radius: 0.5rem;
   padding: 0.5rem;
   cursor: pointer;
+  margin: 0.5rem 0rem;
+`
+
+export const ProjectItemModalContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
 `
 
 export const ProjectItemModal = styled.div`
@@ -23,21 +33,22 @@ export const ProjectItemModal = styled.div`
   filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 2rem;
   padding: 1rem;
+  @media (max-width: 768px) {
+    width: 18rem;
+  }
 `
 
 export const ProjectItemModalCloseButton = styled.div`
-  font-size: 2rem;
-  border: 1px solid;
   position: absolute;
-  right: 2rem;
-  border-radius: 100%;
-  padding: 0rem 0.8rem;
+  right: 1rem;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  p {
-    margin: 0;
-    margin-bottom: 0.2rem;
-  }
+`
+
+export const ProjectItemModalContent = styled.div`
+  padding: 2rem 1rem;
+`
+
+export const ProjectItemModalBasicText = styled.p`
+  font-size: 1rem;
+  font-weight: bold;
 `

@@ -7,10 +7,10 @@ import ProjectListWrapper from './components/ProjectList/wrapper'
 function App() {
   return (
     <div className="HighWrapper">
-      <div>
+      <div className="Title">
         <h1>DevoirBot</h1>
       </div>
-      <div>
+      <div className="ProjectList">
         <ProjectListWrapper />
       </div>
     </div>
