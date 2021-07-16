@@ -13,14 +13,30 @@ body {
   width: 100%;
 }
 
-.Title {
+.Header {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-bottom: 2rem;
+}
+
+.SwitchTheme {
+  position: absolute !important;
+  right: 3rem;
 }
 
 .ProjectList {
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .Header {
+    flex-direction: column;
+  }
+  .SwitchTheme {
+    position: relative !important;
+    right: 0;
+  }
 }

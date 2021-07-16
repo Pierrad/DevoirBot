@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import useDarkMode from 'use-dark-mode'
 
 import * as SC from './styles'
 
@@ -6,6 +7,7 @@ function ProjectItem(props) {
   const { data } = props
 
   const [modalOpen, setModalOpen] = useState(false)
+  const darkmode = useDarkMode(true)
 
   const handleClick = () => {
     setModalOpen(!modalOpen)
@@ -20,7 +22,12 @@ function ProjectItem(props) {
       {modalOpen && (
         <SC.ProjectItemModalContainer>
           <SC.ProjectItemModal>
-            <SC.ProjectItemModalCloseButton onClick={handleClick}><img src="cancel.png" alt='Hide modal'></img></SC.ProjectItemModalCloseButton>
+            <SC.ProjectItemModalCloseButton onClick={handleClick}>
+              {darkmode.value
+                ? <img src="cancel_light.png" alt='Hide modal' />
+                : <img src="cancel_black.png" alt='Hide modal' />
+              }
+            </SC.ProjectItemModalCloseButton>
             <SC.ProjectItemModalContent>
               <SC.ProjectItemModalBasicText>A faire : </SC.ProjectItemModalBasicText>
               <p>{data.content}</p>

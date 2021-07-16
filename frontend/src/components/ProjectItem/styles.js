@@ -29,7 +29,7 @@ export const ProjectItemModal = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background: ${({ theme }) => theme.body};
   filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 2rem;
   padding: 1rem;
