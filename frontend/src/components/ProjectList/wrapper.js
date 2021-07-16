@@ -6,7 +6,7 @@ function ProjectListWrapper() {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/projectWithTask`).then(res => res.json()).then(data => {
+    fetch(`https://devoir-bot.herokuapp.com/projectWithTask`).then(res => res.json()).then(data => {
       setData(data.response)
     })
   }, [])
